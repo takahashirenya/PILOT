@@ -14,23 +14,19 @@ typedef struct {
     uint32_t speed_pitch_hz;
     uint32_t speed_period_ms;
     uint32_t next_beep_ms;
-    uint32_t last_speed_ms;
-    uint32_t next_timeout_toggle_ms;
-    bool timeout_alert_active;
-    bool timeout_high_tone;
     bool confirmation_active;
 } buzzer_t;
 
 // Initializes a passive PWM buzzer.  Call buzzer_update() from the main loop.
-void buzzer_init(buzzer_t *buzzer, unsigned int gpio, uint32_t now_ms);
+void buzzer_init(buzzer_t *buzzer, unsigned int gpio);
 
-// Stops the startup beep and enables speed-controlled tones permanently.
+// Plays the first button press confirmation for 2 seconds.
 void buzzer_enable_speed_mode(buzzer_t *buzzer, uint32_t now_ms);
 
-// Pass the newest CAN ID 4 speed value to update the tone immediately.
+// Compatibility entry point: speed warnings are disabled.
 void buzzer_set_speed(buzzer_t *buzzer, float speed, uint32_t now_ms);
 
-// Generates the scheduled pulse and stops an elapsed pulse; never blocks.
+// Stops the confirmation when elapsed; never blocks.
 void buzzer_update(buzzer_t *buzzer, uint32_t now_ms);
 
 #endif

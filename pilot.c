@@ -31,7 +31,7 @@
 #define LAD_ADC_GPIO 27
 #define LAD_ADC_INPUT 1
 #define BUTTON_GPIO 26
-#define BUZZER_GPIO 14
+#define BUZZER_GPIO 15
 
 #define ADC_HISTORY_SIZE 1
 #define ADC_INPUT_COUNT 8
@@ -96,7 +96,7 @@ int main(void) {
     adc_gpio_init(LAD_ADC_GPIO);
 
     buzzer_t buzzer;
-    buzzer_init(&buzzer, BUZZER_GPIO, to_ms_since_boot(get_absolute_time()));
+    buzzer_init(&buzzer, BUZZER_GPIO);
 
     mcp2515_t can;
     mcp2515_init_struct(&can, CAN_SPI, CAN_SCK_PIN, CAN_MOSI_PIN, CAN_MISO_PIN,
